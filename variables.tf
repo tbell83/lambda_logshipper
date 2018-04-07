@@ -4,14 +4,14 @@ variable "tags" {
 
   default = {
     "Managed" = "Terraform"
-    "Name"    = "cwl"
+    "Name"    = "logshipper"
   }
 }
 
 variable "name" {
   description = "Prefix for resources in module"
   type        = "string"
-  default     = "lambda_logshipper"
+  default     = "logshipper"
 }
 
 variable "source_account_id" {
