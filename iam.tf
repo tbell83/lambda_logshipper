@@ -32,13 +32,13 @@ resource "aws_iam_policy" "cloudwatch_access" {
 data "aws_iam_policy_document" "cloudwatch_access" {
   statement {
     sid       = "Logshipper create cloudwatch log groups"
-    resources = ["arn:aws:logs:us-east-1:${var.source_account_id}:*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.name}:${var.source_account_id}:*"]
     actions   = ["logs:CreateLogGroup"]
   }
 
   statement {
     sid       = "Logshipper write cloudwatch logs"
-    resources = ["arn:aws:logs:us-east-1:${var.source_account_id}:log-group:/aws/lambda/${aws_lambda_function.s3_logshipper.name}:*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.name}:${var.source_account_id}:log-group:/aws/lambda/${aws_lambda_function.s3_logshipper.function_name}:*"]
 
     actions = [
       "logs:CreateLogStream",
@@ -55,7 +55,7 @@ resource "aws_iam_policy" "s3_access" {
 data "aws_iam_policy_document" "s3_access" {
   statement {
     sid       = "Pull from source bucket"
-    resources = ["${join("/*,", var.source_bucket_arns)}"]
+    resources = ["${formatlist("%s/*", var.source_bucket_arns)}"]
     actions   = ["s3:GetObject"]
   }
 

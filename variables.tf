@@ -38,3 +38,8 @@ variable "target_path" {
   description = "Prefix for objects in destination log bucket"
   type        = "string"
 }
+
+variable "source_bucket_count" {
+  description = "Number of source buckets to trigger the lambda. Due to a limitation of terraform we cannot simply compute the length of the `source_bucket_arns` list when it contains computed values. https://github.com/hashicorp/terraform/issues/17421"
+  type        = "string"
+}
