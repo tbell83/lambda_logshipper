@@ -54,8 +54,10 @@ resource "aws_iam_policy" "s3_access" {
 
 data "aws_iam_policy_document" "s3_access" {
   statement {
-    sid       = "PullFromSourceBucket"
-    resources = ["arn:aws:s3:::${formatlist("%s/*", var.source_bucket_names)}"]
+    sid = "PullFromSourceBucket"
+
+    # resources = ["arn:aws:s3:::${formatlist("%s/*", var.source_bucket_names)}"]
+    resources = ["${formatlist("%s/*", var.source_bucket_names)}"]
     actions   = ["s3:GetObject"]
   }
 
