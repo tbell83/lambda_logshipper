@@ -4,8 +4,9 @@ data "aws_s3_bucket" "source_bucket" {
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  count  = "${var.source_bucket_count}"
-  name   = "${var.name}-${data.aws_s3_bucket.source_bucket.*.id[count.index]}"
+  count = "${var.source_bucket_count}"
+
+  # name   = "${var.name}-${data.aws_s3_bucket.source_bucket.*.id[count.index]}"
   bucket = "${data.aws_s3_bucket.source_bucket.*.id[count.index]}"
 
   lambda_function {
