@@ -21,5 +21,5 @@ resource "aws_lambda_permission" "s3_trigger" {
   principal      = "s3.amazonaws.com"
   statement_id   = "${var.name}-s3-logshipper${count.index}"
   source_account = "${var.source_account_id}"
-  source_arn     = "${element(var.source_bucket_arns, count.index)}"
+  source_arn     = "${data.aws_s3_bucket.source_bucket.*.id[count.index]}"
 }
