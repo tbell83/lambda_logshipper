@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "s3_logshipper" {
-  filename      = "payload.zip"
+  filename      = "${path.module}/payload.zip"
   function_name = "${var.name}_s3_logshipper"
   role          = "${aws_iam_role.s3_logshipper.arn}"
   runtime       = "nodejs6.10"
