@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "cloudwatch_access" {
   }
 
   statement {
-    sid       = "Logshipper write cloudwatch logs"
+    sid       = "LogshipperWriteCloudwatchLogs"
     resources = ["arn:aws:logs:${data.aws_region.current.name}:${var.source_account_id}:log-group:/aws/lambda/${aws_lambda_function.s3_logshipper.function_name}:*"]
 
     actions = [
