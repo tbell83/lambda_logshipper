@@ -18,7 +18,7 @@ resource "aws_lambda_permission" "s3_trigger" {
   count          = "${var.source_bucket_count}"
   action         = "lambda:InvokeFunction"
   function_name  = "${aws_lambda_function.s3_logshipper.function_name}"
-  principal      = "s3.amazon.com"
+  principal      = "s3.amazonaws.com"
   statement_id   = "${var.name}-s3-logshipper${count.index}"
   source_account = "${var.source_account_id}"
   source_arn     = "${element(var.source_bucket_arns, count.index)}"
