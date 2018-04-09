@@ -19,8 +19,8 @@ variable "source_account_id" {
   type        = "string"
 }
 
-variable "source_bucket_arns" {
-  description = "ARN of bucket being montoring for events"
+variable "source_bucket_names" {
+  description = "Name of bucket being montoring for events"
   type        = "list"
 }
 
