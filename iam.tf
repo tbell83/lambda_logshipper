@@ -31,7 +31,7 @@ resource "aws_iam_policy" "cloudwatch_access" {
 
 data "aws_iam_policy_document" "cloudwatch_access" {
   statement {
-    sid       = "Logshipper create cloudwatch log groups"
+    sid       = "LogshipperCreateCloudwatchLogGroups"
     resources = ["arn:aws:logs:${data.aws_region.current.name}:${var.source_account_id}:*"]
     actions   = ["logs:CreateLogGroup"]
   }
@@ -54,13 +54,13 @@ resource "aws_iam_policy" "s3_access" {
 
 data "aws_iam_policy_document" "s3_access" {
   statement {
-    sid       = "Pull from source bucket"
+    sid       = "PullFromSourceBucket"
     resources = ["${formatlist("%s/*", var.source_bucket_arns)}"]
     actions   = ["s3:GetObject"]
   }
 
   statement {
-    sid       = "Push to target bucket"
+    sid       = "PushToTargetBucket"
     resources = ["${var.target_bucket_arn}/*"]
 
     actions = [
