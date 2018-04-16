@@ -14,6 +14,10 @@ resource "aws_lambda_function" "s3_logshipper" {
       "TARGET_ACL"    = "${var.target_acl}"
     }
   }
+
+  lifecycle {
+    ignore_changes = ["filename"]
+  }
 }
 
 resource "aws_lambda_permission" "s3_trigger" {
