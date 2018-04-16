@@ -16,7 +16,7 @@ resource "aws_lambda_function" "s3_logshipper" {
   }
 
   lifecycle {
-    ignore_changes = ["filename"]
+    ignore_changes = ["filename", "last_modified"]
   }
 }
 
