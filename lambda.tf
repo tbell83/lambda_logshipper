@@ -29,3 +29,9 @@ resource "aws_lambda_permission" "s3_trigger" {
   source_account = "${var.source_account_id}"
   source_arn     = "${data.aws_s3_bucket.source_bucket.*.arn[count.index]}"
 }
+
+resource "aws_cloudwatch_log_group" "s3_logshipper" {
+  name              = "/aws/lambda/${var.name}_s3_logshipper"
+  retention_in_days = "${var.log_retention}"
+  tags              = "${var.tags}"
+}
