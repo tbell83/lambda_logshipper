@@ -49,3 +49,9 @@ variable "target_path" {
   description = "Prefix for objects in destination log bucket"
   type        = "string"
 }
+
+variable "log_retention" {
+  description = "Cloudwatch log retention in days."
+  type        = "string"
+  default     = 7
+}
