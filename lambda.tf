@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "s3_logshipper" {
   filename         = "${path.module}/payload.zip"
-  source_code_hash = "${base64sha256(file("${path.module}/payload.zip"))}"
+  source_code_hash = "${filebase64sha256("${path.module}/payload.zip")}"
   function_name    = "${var.name}_s3_logshipper"
   role             = "${aws_iam_role.s3_logshipper.arn}"
   runtime          = "nodejs6.10"
@@ -8,7 +8,7 @@ resource "aws_lambda_function" "s3_logshipper" {
   tags             = "${var.tags}"
 
   environment {
-    variables {
+    variables = {
       TARGET_PATH   = "${var.target_path}"
       TARGET_BUCKET = "${var.target_bucket}"
       TARGET_ACL    = "${var.target_acl}"
