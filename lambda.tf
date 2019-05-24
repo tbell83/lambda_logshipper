@@ -9,9 +9,9 @@ resource "aws_lambda_function" "s3_logshipper" {
 
   environment {
     variables {
-      "TARGET_PATH"   = "${var.target_path}"
-      "TARGET_BUCKET" = "${var.target_bucket}"
-      "TARGET_ACL"    = "${var.target_acl}"
+      TARGET_PATH   = "${var.target_path}"
+      TARGET_BUCKET = "${var.target_bucket}"
+      TARGET_ACL    = "${var.target_acl}"
     }
   }
 

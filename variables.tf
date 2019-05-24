@@ -24,8 +24,8 @@ variable "tags" {
   type        = "map"
 
   default = {
-    "Managed" = "Terraform"
-    "Name"    = "logshipper"
+    Managed = "Terraform"
+    Name    = "logshipper"
   }
 }
 
