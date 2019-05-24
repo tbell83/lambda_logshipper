@@ -1,6 +1,6 @@
 resource "aws_iam_role" "s3_logshipper" {
   name               = "${var.name}-s3-logshipper"
-  assume_role_policy = "${data.aws_iam_policy_document.s3_logshipper_assume.json}"
+  assume_role_policy = data.aws_iam_policy_document.s3_logshipper_assume.json
 }
 
 data "aws_iam_policy_document" "s3_logshipper_assume" {
@@ -15,18 +15,18 @@ data "aws_iam_policy_document" "s3_logshipper_assume" {
 }
 
 resource "aws_iam_role_policy_attachment" "s3_logshipper-cloudwatch_access" {
-  role       = "${aws_iam_role.s3_logshipper.name}"
-  policy_arn = "${aws_iam_policy.cloudwatch_access.arn}"
+  role       = aws_iam_role.s3_logshipper.name
+  policy_arn = aws_iam_policy.cloudwatch_access.arn
 }
 
 resource "aws_iam_role_policy_attachment" "s3_logshipper-s3_access" {
-  role       = "${aws_iam_role.s3_logshipper.name}"
-  policy_arn = "${aws_iam_policy.s3_access.arn}"
+  role       = aws_iam_role.s3_logshipper.name
+  policy_arn = aws_iam_policy.s3_access.arn
 }
 
 resource "aws_iam_policy" "cloudwatch_access" {
   name   = "${var.name}-s3_logshipper-cloudwatch-access"
-  policy = "${data.aws_iam_policy_document.cloudwatch_access.json}"
+  policy = data.aws_iam_policy_document.cloudwatch_access.json
 }
 
 data "aws_iam_policy_document" "cloudwatch_access" {
@@ -49,13 +49,13 @@ data "aws_iam_policy_document" "cloudwatch_access" {
 
 resource "aws_iam_policy" "s3_access" {
   name   = "${var.name}-s3_logshipper-s3-access"
-  policy = "${data.aws_iam_policy_document.s3_access.json}"
+  policy = data.aws_iam_policy_document.s3_access.json
 }
 
 data "aws_iam_policy_document" "s3_access" {
   statement {
     sid       = "PullFromSourceBucket"
-    resources = ["${formatlist("arn:aws:s3:::%s/*", var.source_bucket_names)}"]
+    resources = formatlist("arn:aws:s3:::%s/*", var.source_bucket_names)
     actions   = ["s3:GetObject"]
   }
 
@@ -69,3 +69,4 @@ data "aws_iam_policy_document" "s3_access" {
     ]
   }
 }
+
