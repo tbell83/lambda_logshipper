@@ -55,3 +55,8 @@ variable "log_retention" {
   type        = "string"
   default     = 7
 }
+
+variable "lambda_runtime" {
+  description = "Lambda Runtime"
+  default     = "nodejs6.10"
+}

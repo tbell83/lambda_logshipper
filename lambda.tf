@@ -3,7 +3,7 @@ resource "aws_lambda_function" "s3_logshipper" {
   source_code_hash = "${filebase64sha256("${path.module}/payload.zip")}"
   function_name    = "${var.name}_s3_logshipper"
   role             = "${aws_iam_role.s3_logshipper.arn}"
-  runtime          = "nodejs6.10"
+  runtime          = "${var.lambda_runtime}"
   handler          = "index.handler"
   tags             = "${var.tags}"
 
